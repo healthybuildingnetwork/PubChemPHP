@@ -1,0 +1,23 @@
+{
+    "name": "healthybuildingnetwork/pub-chem-php",
+    "description": "PHP wrapper for the PubChem PUG REST API.  Inspired by https://github.com/mcs07/PubChemPy",
+    "keywords": ["pubchem", "chemical", "substance", "healthy materials", "hbn", "healthy building", "building products"],
+    "homepage": "http://healthybuilding.net",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "jonstavis",
+            "email": "jstavis@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9",
+        "guzzlehttp/guzzle": "^6.2" 
+    },
+    "autoload": {
+        "psr-0" : {
+            "HBN\\PubChemPHP" : "src"
+        }
+    },
+    "minimum-stability": "stable"
+}
