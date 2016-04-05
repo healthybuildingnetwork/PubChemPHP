@@ -1,7 +1,5 @@
 <?php namespace HBN\PubChemPHP;
 
-require_once __DIR__ . '/../../../vendor/autoload.php';
-
 use HBN\PubChemPHP\Config\Config;
 use HBN\PubChemPHP\Exceptions\MissingResponseException;
 use HBN\PubChemPHP\Exceptions\MissingApiRecordIdentifierException;
