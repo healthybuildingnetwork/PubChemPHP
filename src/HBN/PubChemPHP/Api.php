@@ -21,6 +21,8 @@ class Api {
      */
     protected $json;
 
+    protected $record;
+
     public function __construct()
     {
     }
