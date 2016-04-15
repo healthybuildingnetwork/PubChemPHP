@@ -96,4 +96,12 @@ class Compound extends Api {
 
         return $result;
     }
+
+    public function chemical_formula()
+    {
+        $result = Request::getCompoundFormula($this->cid()); 
+
+        return $result->PropertyTable->Properties[0]->MolecularFormula;
+    }
+    
 }

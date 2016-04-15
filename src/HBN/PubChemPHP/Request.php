@@ -21,24 +21,29 @@ class Request {
 
     public static function getCompound($cid)
     {
-        return self::get($cid, 'cid', 'compound', null, 'JSON'); 
+        return self::get($cid, 'cid', 'compound', null, 'JSON', null); 
     }
 
     public static function getCompoundSynonyms($cid)
     {
-        return self::get($cid, 'cid', 'compound', 'synonyms', 'JSON'); 
+        return self::get($cid, 'cid', 'compound', 'synonyms', 'JSON', null); 
+    }
+
+    public static function getCompoundFormula($cid)
+    {
+        return self::get($cid, 'cid', 'compound', 'property', 'JSON', 'MolecularFormula,InChIKey'); 
     }
 
     public static function getCompoundImage($cid)
     {
         $record_type = '2d';
         $image_size = 'small';
-        return self::getUrl($cid, 'cid', 'compound', null, 'PNG', compact('record_type', 'image_size'));
+        return self::getUrl($cid, 'cid', 'compound', null, 'PNG', null, compact('record_type', 'image_size'));
     }
 
-    private static function getUrl($identifier, $namespace, $domain, $operation, $output, $params = [])
+    private static function getUrl($identifier, $namespace, $domain, $operation, $output, $search_type, $params = [])
     {
-        $vals = array_filter([$domain, $namespace, $identifier, $operation, $output]);
+        $vals = array_filter([$domain, $namespace, $identifier, $operation, $search_type, $output]);
         $url = Config::get('api_base') . '/' . join('/', $vals);
 
         if (sizeof($params) > 0) {
@@ -57,3 +62,4 @@ class Request {
         return json_decode($res->getBody());
     }
 }
+
