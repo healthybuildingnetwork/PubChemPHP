@@ -88,6 +88,20 @@ class Compound extends Api {
         return $this->getProp('SMILES', [ 'name' => 'Canonical' ]);
     }
 
+    public function inChI()
+    {
+        if (!$this->record) throw new MissingRecordException();
+
+        return $this->getProp('InChI');
+    }
+
+    public function inChIKey()
+    {
+        if (!$this->record) throw new MissingRecordException();
+
+        return $this->getProp('InChIKey');
+    }
+
     public function synonyms()
     {
         if (!$this->record) throw new MissingRecordException();
