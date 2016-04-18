@@ -81,6 +81,13 @@ class Compound extends Api {
         return $this->bonds;
     }
 
+    public function smiles()
+    {
+        if (!$this->record) throw new MissingRecordException();
+
+        return $this->getProp('SMILES', [ 'name' => 'Canonical' ]);
+    }
+
     public function synonyms()
     {
         if (!$this->record) throw new MissingRecordException();
@@ -104,4 +111,19 @@ class Compound extends Api {
         return $result->PropertyTable->Properties[0]->MolecularFormula;
     }
     
+    private function getProp($label, $filter = [])
+    {
+        foreach ($this->record->props as $prop) {
+            if ($prop->urn->label == $label) {
+                foreach ($filter as $key => $value) {
+                    if ($prop->urn->{$key} != $value) {
+                        break;
+                    }
+                }
+
+                if (isset($prop->value->fval)) { return $prop->value->fval; }
+                if (isset($prop->value->sval)) { return $prop->value->sval; }
+            }
+        } 
+    }
 }

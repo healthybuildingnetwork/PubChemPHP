@@ -51,4 +51,9 @@ class Api {
         return $this->json->{$this->apiRecordIdentifier}[0];
     }
 
+    public function getRaw()
+    {
+        return $this->record;
+    }
+
 }
