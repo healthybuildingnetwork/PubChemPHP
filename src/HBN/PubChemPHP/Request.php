@@ -41,6 +41,12 @@ class Request {
         return self::getUrl($cid, 'cid', 'compound', null, 'PNG', null, compact('record_type', 'image_size'));
     }
 
+    public static function getCompoundCids($cid)
+    {
+        $cids_type = 'component';
+        return self::get($cid, 'cid', 'compound', 'cids', 'JSON', null, compact('cids_type')) ;
+    }
+
     private static function getUrl($identifier, $namespace, $domain, $operation, $output, $search_type, $params = [])
     {
         $vals = array_filter([$domain, $namespace, $identifier, $operation, $search_type, $output]);

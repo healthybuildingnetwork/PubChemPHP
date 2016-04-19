@@ -102,6 +102,13 @@ class Compound extends Api {
         return $this->getProp('InChIKey');
     }
 
+    public function iupac()
+    {
+        if (!$this->record) throw new MissingRecordException();
+
+        return $this->getProp('IUPAC Name', [ 'name' => 'Preferred' ]);
+    }
+
     public function synonyms()
     {
         if (!$this->record) throw new MissingRecordException();
@@ -125,6 +132,13 @@ class Compound extends Api {
         return $result->PropertyTable->Properties[0]->MolecularFormula;
     }
     
+    public function cids()
+    {
+        $result = Request::getCompoundCids($this->cid()); 
+
+        return $result->IdentifierList->CID;
+    }
+
     private function getProp($label, $filter = [])
     {
         foreach ($this->record->props as $prop) {
