@@ -118,6 +118,13 @@ class Compound extends Api {
         return $results->InformationList->Information[0]->Synonym;
     }
 
+    public function molecular_weight()
+    {
+        if (!$this->record) throw new MissingRecordException();
+
+        return $this->getProp('Molecular Weight');
+    }
+
     public function image()
     {
         $result = Request::getCompoundImage($this->cid()); 
