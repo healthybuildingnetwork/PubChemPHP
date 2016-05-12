@@ -12,10 +12,17 @@ class Compound extends Api {
     public function from_cid($cid) {
 
         $this->json = Request::getCompound($cid);
-        $this->record = $this->getRecord();
 
-        $this->setup_atoms();
-        $this->setup_bonds();
+        $this->setup();
+
+        return $this;
+    }
+
+    public function from_name($name)
+    {
+        $this->json = Request::getCompoundByName($name);
+
+        $this->setup();
 
         return $this;
     }
@@ -144,6 +151,14 @@ class Compound extends Api {
         $result = Request::getCompoundCids($this->cid()); 
 
         return $result->IdentifierList->CID;
+    }
+
+    private function setup()
+    {
+        $this->record = $this->getRecord();
+
+        $this->setup_atoms();
+        $this->setup_bonds();
     }
 
     private function getProp($label, $filter = [])

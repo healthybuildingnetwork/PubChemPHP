@@ -24,6 +24,11 @@ class Request {
         return self::get($cid, 'cid', 'compound', null, 'JSON', null); 
     }
 
+    public static function getCompoundByName($name)
+    {
+        return self::get($name, 'name', 'compound', null, 'JSON', null); 
+    }
+
     public static function getCompoundSynonyms($cid)
     {
         return self::get($cid, 'cid', 'compound', 'synonyms', 'JSON', null); 
