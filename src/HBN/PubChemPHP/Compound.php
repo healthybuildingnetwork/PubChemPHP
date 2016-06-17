@@ -1,6 +1,7 @@
 <?php namespace HBN\PubChemPHP;
 
 use HBN\PubChemPHP\Exceptions\MissingRecordException;
+use HBN\PubChemPHP\Exceptions\ClientException;
 
 class Compound extends Api {
 
@@ -20,7 +21,11 @@ class Compound extends Api {
 
     public function from_name($name)
     {
-        $this->json = Request::getCompoundByName($name);
+        try {
+            $this->json = Request::getCompoundByName($name);
+        } catch (ClientException $e) {
+            return null;
+        }
 
         $this->setup();
 

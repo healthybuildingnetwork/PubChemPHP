@@ -2,6 +2,7 @@
 
 use GuzzleHttp\Client;
 use HBN\PubChemPHP\Config\Config;
+use HBN\PubChemPHP\Exceptions\ClientException;
 
 class Request {
 
@@ -68,7 +69,11 @@ class Request {
     {
         $url = self::getUrl($identifier, $namespace, $domain, $operation, $output, $params);
 
-        $res = self::getClientInstance()->post($url);
+        try {
+            $res = self::getClientInstance()->post($url);
+        } catch (\GuzzleHttp\Exception\ClientException $e) {
+            throw new ClientException();
+        }
 
         return json_decode($res->getBody());
     }
