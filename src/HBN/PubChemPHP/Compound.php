@@ -48,12 +48,14 @@ class Compound extends Api {
     {
         $this->bonds = []; 
 
-        $aid1s = $this->record->bonds->aid1;
-        $aid2s = $this->record->bonds->aid2;
-        $orders = $this->record->bonds->order;
+        if (isset($this->record->bonds)) {
+            $aid1s = $this->record->bonds->aid1;
+            $aid2s = $this->record->bonds->aid2;
+            $orders = $this->record->bonds->order;
 
-        foreach (array_map(null, $aid1s, $aid2s, $orders) as $set) {
-            $this->bonds[] = new Bond($set[0], $set[1], $set[2]);
+            foreach (array_map(null, $aid1s, $aid2s, $orders) as $set) {
+                $this->bonds[] = new Bond($set[0], $set[1], $set[2]);
+            }
         }
 
         // todo - styles
