@@ -25,6 +25,8 @@ class Compound extends Api {
             $this->json = Request::getCompoundByName($name);
         } catch (ClientException $e) {
             return null;
+        } catch (Exception $e) {
+            return null;
         }
 
         $this->setup();
@@ -150,14 +152,14 @@ class Compound extends Api {
     {
         $result = Request::getCompoundFormula($this->cid()); 
 
-        return $result->PropertyTable->Properties[0]->MolecularFormula;
+        return $result ? $result->PropertyTable->Properties[0]->MolecularFormula : null;
     }
     
     public function cids()
     {
         $result = Request::getCompoundCids($this->cid()); 
 
-        return $result->IdentifierList->CID;
+        return $result ? $result->IdentifierList->CID : null;
     }
 
     private function setup()
