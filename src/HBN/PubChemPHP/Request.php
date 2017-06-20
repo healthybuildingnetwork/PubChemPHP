@@ -72,7 +72,9 @@ class Request {
         try {
             $res = self::getClientInstance()->post($url);
         } catch (\GuzzleHttp\Exception\ClientException $e) {
-            throw new ClientException();
+            return null;
+        } catch (\GuzzleHttp\Exception\ServerException $se) {
+            return null;
         }
 
         return json_decode($res->getBody());
